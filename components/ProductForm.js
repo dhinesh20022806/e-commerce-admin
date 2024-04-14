@@ -40,6 +40,7 @@ export default function ProductForm({
       category,
       properties: productProperties,
     };
+    console.log(data, 'from productForm')
     if (_id) {
       //update
       await axios.put("/api/products", { ...data, _id });
@@ -54,19 +55,33 @@ export default function ProductForm({
   }
   async function uploadImages(ev) {
    
-    const files = ev.target?.files;
-    if (files?.length > 0) {
-      setIsUploading(true);
-      const data = new FormData();
-      for (const file of files) {
-        data.append("file", file);
-      }
-      const res = await axios.post("/api/upload", data);
-      setImages((oldImages) => {
-        return [...oldImages, ...res.data.links];
+    // const files = ev.target?.files;
+    // if (files?.length > 0) {
+    //   setIsUploading(true);
+    //   const data = new FormData();
+    //   for (const file of files) {
+    //     data.append("file", file);
+    //   }
+    //   const res = await axios.post("/api/upload", data);
+    //   setImages((oldImages) => {
+    //     return [...oldImages, ...res.data.links];
+    //   });
+    //   setIsUploading(false);
+    // }
+    const selectedFile = ev.target?.files[0];
+    setIsUploading(true);
+
+    const reader = new FileReader();
+    reader.onload = ()=> {
+      setImages(oldImages =>{
+        return [...oldImages, reader.result]
       });
-      setIsUploading(false);
-    }
+
+    };
+
+    reader.readAsDataURL(selectedFile);
+    setIsUploading(false);
+
   }
   function updateImagesOrder(images) {
     setImages(images);
