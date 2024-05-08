@@ -14,7 +14,7 @@ export default function Layout({ children }) {
             onClick={() => signIn("google")}
             className="bg-[#644930] text-white p-2 px-4 rounded-lg"
           >
-            Login with Google
+            Login with Google 
           </button>
         </div>
       </div>

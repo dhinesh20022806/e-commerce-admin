@@ -111,7 +111,7 @@ export default function Nav({ show }) {
           </svg>
           Orders
         </Link>
-        <Link
+        {/* <Link
           href={"/settings"}
           className={pathname.includes("/settings") ? activeLink : inactiveLink}
         >
@@ -137,7 +137,7 @@ export default function Nav({ show }) {
             />
           </svg>
           Settings
-        </Link>
+        </Link> */}
         <button onClick={logout} className={inactiveLink}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

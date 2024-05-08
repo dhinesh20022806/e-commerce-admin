@@ -9,12 +9,15 @@ export default function OrdersPage() {
       setOrders(response.data);
     });
   }, []);
+
+    console.log(orders[0]?.line_items[0].price_data.unit_amount)
   return (
     <Layout>
       <h1>Orders</h1>
       <table className="basic">
         <thead>
           <tr>
+          <th>Date</th>
             <th>Paid</th>
             <th>Recipient</th>
             <th>Products</th>
@@ -23,9 +26,11 @@ export default function OrdersPage() {
         <tbody>
           {orders.length > 0 &&
             orders.map((order, index) => (
-              <tr key={index}>
-                <td className={order.paid ? "text-green-600" : "text-red-600"}>
-                  {order.paid ? "YES" : "NO"}
+              <tr key={order._id}>
+              <td>{(new Date(order.createdAt)).toLocaleString() }
+            </td>
+                <td className={!order.paid ? "text-green-600" : "text-red-600"}>
+                  {!order.paid ? "YES" : "NO"}
                 </td>
                 <td>
                   {order.name} {order.email}
